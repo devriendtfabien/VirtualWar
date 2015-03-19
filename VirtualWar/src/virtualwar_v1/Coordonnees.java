@@ -24,5 +24,4 @@ public class Coordonnees {
 	public Coordonnees ajout(Coordonnees coord){
 		return coord;		
 	}
-
 }
