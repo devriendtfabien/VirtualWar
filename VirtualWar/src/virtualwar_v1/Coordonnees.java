@@ -1,13 +1,13 @@
 package virtualwar_v1;
 
 public class Coordonnees {
-	
+
 	private int largeur;
 	private int hauteur;
-	
-	public Coordonnees(int largeur, int hauteur){
-		this.largeur=largeur;
-		this.hauteur=hauteur;
+
+	public Coordonnees(int largeur, int hauteur) {
+		this.largeur = largeur;
+		this.hauteur = hauteur;
 	}
 
 	public String toString() {
@@ -21,8 +21,13 @@ public class Coordonnees {
 	public int getHauteur() {
 		return hauteur;
 	}
-	
-	public Coordonnees ajout(Coordonnees coord){
-		return coord;		
+
+	public Coordonnees ajout(Coordonnees coord) {
+		return new Coordonnees(this.hauteur + coord.hauteur, this.largeur
+				+ coord.largeur);
+	}
+
+	public Coordonnees retire(Coordonnees coord) {
+		return new Coordonnees(this.hauteur - coord.hauteur, this.largeur - coord.largeur);
 	}
 }
