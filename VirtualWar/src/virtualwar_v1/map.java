@@ -10,15 +10,16 @@ public map(int largeur, int hauteur){
 }
 String [][] init(int largeur, int hauteur){
 	grille = new String [hauteur][largeur];
-	for(int ligne=0; ligne<grille.length; ligne++){ //parcours des lignes
-	    if(ligne==grille.length-1){  //si c'est la derniere ligne
-		for(int i=0; i<grille.length;i++){ 
+	
+	for(int ligne=0; ligne<hauteur; ligne++){ //parcours des lignes
+	    if(ligne==hauteur-1){  //si c'est la derniere ligne
+		for(int i=0; i<largeur;i++){ 
 		    grille[ligne][i]=" ";
 		}
 	    }	    
 	    else if(ligne%2==0){ // si la ligne est paire  
-		for(int col=0; col<grille.length; col=col+2){ //parcours des colonnes des lignes paires
-		    if(col==grille.length-2){
+		for(int col=0; col<largeur; col=col+2){ //parcours des colonnes des lignes paires
+		    if(col==largeur-2){
 			    
 			grille[ligne][col]="+";
 			grille[ligne][col+1]=" ";
@@ -28,7 +29,7 @@ String [][] init(int largeur, int hauteur){
 			grille[ligne][col+1]="_";
 		    }	
 		}
-	    } else{ for(int col=0; col<grille.length; col=col+2){
+	    } else{ for(int col=0; col<largeur; col=col+2){
 		    grille[ligne][col]="|";
 		    grille[ligne][col+1]=" ";}
 	    }
@@ -37,8 +38,8 @@ String [][] init(int largeur, int hauteur){
 } 
 public String toString(){
 	int nb=0;
-	for (int i = 0; i < grille.length; i++) {
-	    for (int j = 0; j <grille.length; j++) {
+	for (int i = 0; i < hauteur; i++) {
+	    for (int j = 0; j <largeur; j++) {
 		System.out.print(grille[i][j]);
 	    }
 	    System.out.println();

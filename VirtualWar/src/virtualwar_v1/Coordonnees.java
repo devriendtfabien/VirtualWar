@@ -5,7 +5,7 @@ public class Coordonnees {
 	private int largeur;
 	private int hauteur;
 
-	public Coordonnees(int largeur, int hauteur) {
+	public Coordonnees(int hauteur, int largeur) {
 		this.largeur = largeur;
 		this.hauteur = hauteur;
 	}
@@ -28,6 +28,7 @@ public class Coordonnees {
 	}
 
 	public Coordonnees retire(Coordonnees coord) {
-		return new Coordonnees(this.hauteur - coord.hauteur, this.largeur - coord.largeur);
+		return new Coordonnees(this.hauteur - coord.hauteur, this.largeur
+				- coord.largeur);
 	}
 }
