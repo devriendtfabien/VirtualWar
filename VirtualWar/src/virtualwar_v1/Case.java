@@ -39,13 +39,13 @@ public class Case extends Cellule {
 			return "X";
 		} else if (super.mine == 2) {
 			return "x";
-		}
-
-		if (robot[0] == null) {
+		} else if (robot[0] == null) {
 			return " ";
 		} else {
-			return robot[0].toString();
+			robot[0].toString();
 		}
+		return "caca";
+
 	}
 
 	@Override

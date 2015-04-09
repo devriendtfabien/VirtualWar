@@ -23,49 +23,19 @@ public abstract class Robot {
 	public String toString() {
 		if (this.equipe == 1)
 			return "R";
-		return "r";
-
-	}
-
-	public int getEnergie() {
-		return energie;
-	}
-
-	public void setEnergie(int energie) {
-		this.energie = energie;
-	}
-
-	public int getEquipe() {
-		return equipe;
+		else if(this.equipe==2){
+			return "r";
+		}		
+		return "  ";
 	}
 
 	public Coordonnees getCoordonnees() {
 		return coord;
 	}
 
-	public void setCoordonnees(Coordonnees c) {
-		this.coord = c;
-	}
-
-	public Vue getVue() {
-		return vue;
-	}
 
 	public void setVue(Vue vue) {
 		this.vue = vue;
-	}
-
-}
-
-public abstract class Robot {
-
-	private int energie;
-	private int equipe;
-
-	/** Constructeur **/
-	public Robot(Vue vue, int x, int y, int equipe) {
-		super();
-		this.equipe = equipe;
 	}
 
 	/** Methodes **/

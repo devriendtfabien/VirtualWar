@@ -20,9 +20,13 @@ public class Plateau {
 		if (l > 2)
 			largeur = l;
 		map = new Cellule[hauteur][largeur];
+		for (int i = 0; i < largeur; i++) {
+			for (int j = 0; j < hauteur; j++) {
+				map[i][j] = new Case(i, j);
+			}
+		}
 		map[0][0] = new Base(0, 0, 1);
 		map[hauteur - 1][largeur - 1] = new Base(hauteur - 1, largeur - 1, 2);
-
 	}
 
 	public void retirerRobot(Robot r, Coordonnees c) {
@@ -31,6 +35,7 @@ public class Plateau {
 
 	public String toString() {
 		String res = "";
+
 		for (int h = 0; h < hauteur; h++) {
 			res += "+";
 			for (int l = 0; l < largeur; l++) {
@@ -38,7 +43,12 @@ public class Plateau {
 			}
 			res += "\n";
 			for (int l = 0; l < largeur; l++) {
-				res += "|   ";
+				if (map[h][l] == null) {
+					res += "| P ";
+				} else {
+					res += "| " + map[h][l] + " ";
+				}
+
 			}
 			res += "|\n";
 		}
@@ -53,7 +63,7 @@ public class Plateau {
 		if (map[c.getHauteur()][c.getLargeur()] == null) {
 			return false;
 		}
-		if (map[c.getHauteur()][c.getLargeur()].estBase() > 0) {
+		if (map[c.getHauteur()][c.getLargeur()] instanceof Base) {
 			return true;
 		}
 		return false;
@@ -66,9 +76,9 @@ public class Plateau {
 	public boolean estObstacle(Coordonnees c) {
 		if (map[c.getHauteur()][c.getLargeur()] == null) {
 			return false;
-		} else {
-			return map[c.getHauteur()][c.getLargeur()].estObstacle();
 		}
+		return map[c.getHauteur()][c.getLargeur()].estObstacle();
+
 	}
 
 	public Robot estRobot(Coordonnees c) {
