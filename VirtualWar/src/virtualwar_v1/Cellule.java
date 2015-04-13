@@ -57,4 +57,8 @@ public abstract class Cellule {
 
 	public abstract boolean deplaceSur(Robot r);
 
+	public void setMine(int equipe) {
+		this.mine = equipe;
+	}
+
 }

@@ -19,23 +19,29 @@ public abstract class Robot {
 		this.vue = vue;
 		this.coord = new Coordonnees(x, y);
 	}
-
-	public String toString() {
-		if (this.equipe == 1)
-			return "R";
-		else if(this.equipe==2){
-			return "r";
-		}		
-		return "  ";
+	public void subitTir(Robot r){
+		this.energie = this.energie - r.getDegatTir();
+		if (this.energie < 0) {
+			this.energie = 0;
+		}
 	}
-
+	public void subitMine(Coordonnees c){
+		this.energie = this.energie - 2;
+		if (this.energie < 0) {
+			this.energie = 0;
+		}
+		this.getVue().exploseMine(c);
+	}
+	
 	public Coordonnees getCoordonnees() {
 		return coord;
 	}
 
-
 	public void setVue(Vue vue) {
 		this.vue = vue;
+	}
+	public void deplacerSur(Coordonnees c){
+		
 	}
 
 	/** Methodes **/
@@ -79,5 +85,13 @@ public abstract class Robot {
 	abstract public int getDegatMine();
 
 	abstract public String getType();
+
+	abstract public String toString();
+
+	abstract public int getEnergieMax();
+
+	abstract public int getPorteeTir();
+
+	abstract public int getPorteeDep();
 
 }

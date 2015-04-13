@@ -41,10 +41,9 @@ public class Case extends Cellule {
 			return "x";
 		} else if (robot[0] == null) {
 			return " ";
-		} else {
-			robot[0].toString();
-		}
-		return "caca";
+		} 
+			return robot[0].toString();
+		
 
 	}
 

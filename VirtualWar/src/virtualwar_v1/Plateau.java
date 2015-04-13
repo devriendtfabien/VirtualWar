@@ -4,6 +4,7 @@ public class Plateau {
 	private int hauteur = 2;
 	private int largeur = 2;
 	private Cellule[][] map;
+	private boolean[][] chemin;
 
 	/**
 	 * Créé un plateau avec comme taille les entiers en paramètres s'ils sont
@@ -20,15 +21,60 @@ public class Plateau {
 		if (l > 2)
 			largeur = l;
 		map = new Cellule[hauteur][largeur];
-		for (int i = 0; i < largeur; i++) {
-			for (int j = 0; j < hauteur; j++) {
-				map[i][j] = new Case(i, j);
+		int randh = 0;
+		int randl = 0;
+		int nbrObst = (((l - 1) * (h - 1)) * main.pourcentageObst) / 100;
+
+		chemin = new boolean[hauteur][largeur];
+		protegerChemin();
+
+		for (int i = 0; i < nbrObst; i++) {
+			while (estBase(new Coordonnees(randh, randl))
+					|| (chemin[randh][randl] == true)
+					|| (estObstacle(new Coordonnees(randh, randl)))) {
+				randh = main.r.nextInt(hauteur);
+				randl = main.r.nextInt(largeur);
+			}
+			map[randh][randl] = new Obstacle(randh, randl);
+		}
+		for (int i = 0; i < hauteur; i++) {
+			for (int j = 0; j < largeur; j++) {
+				if (!estObstacle(new Coordonnees(i, j))
+						&& !estBase(new Coordonnees(i, j))) {
+					map[i][j] = new Case(i, j);
+				}
 			}
 		}
 		map[0][0] = new Base(0, 0, 1);
 		map[hauteur - 1][largeur - 1] = new Base(hauteur - 1, largeur - 1, 2);
+
 	}
 
+	public void protegerChemin() {
+
+		int lChemin = 0;
+		int hChemin = 0;
+		int rand;
+		chemin[0][0] = true;
+		while ((lChemin != largeur - 1) || (hChemin != hauteur - 1)) {
+			if (lChemin == largeur - 1) {
+				hChemin = hChemin + 1;
+			} else if (hChemin == hauteur - 1) {
+				lChemin = lChemin + 1;
+			} else {
+				rand = main.r.nextInt(3);
+				if (rand == 1) {
+					lChemin = lChemin + 1;
+				} else {
+					hChemin = hChemin + 1;
+				}
+			}
+			chemin[hChemin][lChemin] = true;
+		}
+	}
+	public void poserRobot(Robot r, Coordonnees c){
+		map[c.getHauteur()][c.getLargeur()].poserRobot(r);
+	}
 	public void retirerRobot(Robot r, Coordonnees c) {
 		map[c.getHauteur()][c.getLargeur()].retirerRobot(r);
 	}
@@ -91,4 +137,19 @@ public class Plateau {
 		map[c.getHauteur()][c.getLargeur()].exploseMine();
 	}
 
+	public void poserMine(Coordonnees c, int equipe) {
+		map[c.getHauteur()][c.getLargeur()].poserMine(equipe);
+	}
+
+	public void setMine(Coordonnees c, int equipe) {
+		map[c.getHauteur()][c.getLargeur()].setMine(equipe);
+	}
+
+	public int getHauteur() {
+		return this.hauteur;
+	}
+
+	public int getLargeur() {
+		return this.largeur;
+	}
 }
